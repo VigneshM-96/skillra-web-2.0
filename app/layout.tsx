@@ -1,31 +1,24 @@
-import Link from 'next/link';
+import './globals.css';
+import Navbar from "./components/NavBar";
 
 export default function RootLayout({
-  children, 
+  children,
 } : {
-  children:React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body>
 
-        <header style={{padding: '1rem', borderBottom: '1px solid #ccc'}}>
-          <nav style={{display: 'flex', gap: '1.5rem'}}>
-            <Link href="/">Home</Link>
-            <Link href="/about">About Us</Link>
-            <Link href="/courses">Courses Offered</Link>
-            <Link href="/placement">Placements</Link>
-            <Link href="/campus">Campus</Link>
-            <Link href="/career">Career</Link>
-            <Link href="/gallery">Gallery</Link>
-            <Link href="/blogs">Blogs</Link>
-            <Link href="/contact">Contact Us</Link>
-          </nav>
-        </header>
+    <html>
+      <body style={{margin: 0, padding: 0, fontFamily: 'sans-serif'}}>
 
-        {children}
+        <Navbar />
+
+        <main style={{paddingTop: '6rem', margin: 'auto', fontSize: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', minHeight: '80vh', boxSizing: 'border-box'}}>
+          {children}
+        </main>
 
       </body>
     </html>
+
   );
 }
