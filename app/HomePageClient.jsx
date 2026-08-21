@@ -2,6 +2,26 @@
 'use client';
 import Image from 'next/image';
 
+// Config array keeping track of your exact asset filenames from your public directory
+const partnerLogos = [
+  { name: "Aaneel", src: "/HiringPartners/AANEEL.png" },
+  { name: "Access Health", src: "/HiringPartners/ACCESSHEALTH.png" },
+  { name: "Clarus", src: "/HiringPartners/CLARUS.png" },
+  { name: "Cognizant", src: "/HiringPartners/COGNIZANT.png" },
+  { name: "Corro", src: "/HiringPartners/CORRO.png" },
+  { name: "First Source", src: "/HiringPartners/FIRSTSOURCE.png" },
+  { name: "Huron", src: "/HiringPartners/HURON.png" },
+  { name: "Medcode", src: "/HiringPartners/MEDCODE.png" },
+  { name: "Optum", src: "/HiringPartners/OPTUM.png" },
+  { name: "R1", src: "/HiringPartners/R1.png" },
+  { name: "Reveeler", src: "/HiringPartners/REVEELER.png" },
+  { name: "S10", src: "/HiringPartners/S10.png" },
+  { name: "Savista", src: "/HiringPartners/SAVISTA.png" },
+  { name: "Sutherland", src: "/HiringPartners/SUTHERLAND.png" },
+  { name: "Vee Healthtek", src: "/HiringPartners/VEE HEALTHTEK.png" },
+];
+
+
 export default function HomePageClient() {
   return (
     <main style={{ width: '100%', maxWidth: '1200px', margin: 'auto', padding: '0 1rem', boxSizing: 'border-box' }}>
@@ -60,46 +80,43 @@ export default function HomePageClient() {
           display: flex;
         }
 
-        /* The horizontal flex track that handles the moving action */
+                /* Horizontal flex track handling movement logic smoothly */
         .logo-track {
           display: flex;
           width: max-content;
-          gap: 4rem; /* Spacing between your logo assets */
-          padding: 1rem 0;
-          animation: scrollLoop 20s linear infinite;
+          gap: 4rem; 
+          padding: 1.5rem 0;
+          animation: scrollLoop 35s linear infinite; /* Adjusted speed parameters */
         }
 
-        /* Individual asset item layout constraints */
+        /* Individual crisp asset layout boxes */
         .logo-item {
-          font-size: 1.25rem;
-          font-weight: 600;
-          color: #777;
           display: flex;
           align-items: center;
           justify-content: center;
-          white-space: nowrap;
-          padding: 0.5rem 1.5rem;
-          background: #ffffff;
-          border: 1px solid #eee;
-          border-radius: 8px;
-          min-width: 120px;
-          height: 50px;
+          min-width: 160px;
+          height: 65px;
+          filter: grayscale(100%); /* Makes colored logos match in clean slate gray */
+          opacity: 0.65;
+          transition: filter 0.3s ease, opacity 0.3s ease;
         }
 
-        /* Pauses the carousel track when a user hovers over it */
-        .logo-track:hover {
-          animation-play-state: paused;
+        .logo-item:hover {
+          filter: grayscale(0%); /* Returns color vividly on user cursor hover actions */
+          opacity: 1;
         }
 
-        /* Keyframes calculation: Translates half the width (which matches Set 1) */
+        /* True Infinite Keyframe calculations loop point */
         @keyframes scrollLoop {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-50% - 2rem)); /* Offsets half the width + half the gap allocation */
+            /* Translates exactly halfway across the newly scaled array track length */
+            transform: translateX(-50%); 
           }
         }
+
 
         
                 /* Mobile Breakpoint: Stack content as [Content Text -> Image -> Buttons] */
@@ -144,8 +161,8 @@ export default function HomePageClient() {
 
                     /* Infinite Scroller Mobile Override */
           .logo-track {
-            gap: 2rem; /* Tighten up spacing slightly on mobile */
-            animation-duration: 15s; /* Accelerate movement since screen width is tighter */
+            gap: 2rem !important; /* Tighten up spacing slightly on mobile */
+            animation-duration: 45s !important; /* Accelerate movement since screen width is tighter */
           }
           @keyframes scrollLoop {
             0% {
@@ -209,49 +226,40 @@ export default function HomePageClient() {
 
       </section>
 
-            <section className='section-hiring-partners'>
-        <div className='section2-title'>
-          <h2 style={{fontWeight: "bold", textAlign: 'center', marginBottom: '2rem'}}>
-            More than <span style={{color: 'rgb(109, 15, 215)', fontWeight: "bold"}}>25+</span> Hiring Partners
-          </h2>
-        </div>
-        
-        {/* The wrapper acting as a window clipping the overflow */}
-        <div className='section2-list'>
-          {/* The moving track */}
-          <div className='logo-track'>
-            
-            {/* --- SET 1: Original Logos --- */}
-           <div className='logo-item'>
-            <Image 
-              src="/HiringPartners/ACCESSHEALTH.png" 
-              alt="Access Health Logo" 
-              width={140} 
-              height={50} 
-              style={{ objectFit: 'contain' }} 
-            />
-          </div>
-
-            <div className='logo-item'>Logo 2</div>
-            <div className='logo-item'>Logo 3</div>
-            <div className='logo-item'>Logo 4</div>
-            <div className='logo-item'>Logo 5</div>
-            <div className='logo-item'>Logo 6</div>
-
-            {/* --- SET 2: Identical Duplicates for Seamless Infinite Loop --- */}
-            <div className='logo-item'>Logo 1</div>
-            <div className='logo-item'>Logo 2</div>
-            <div className='logo-item'>Logo 3</div>
-            <div className='logo-item'>Logo 4</div>
-            <div className='logo-item'>Logo 5</div>
-            <div className='logo-item'>Logo 6</div>
-            
-          </div>
-        </div>
-      </section>
 
 
       
+      <section className='section-hiring-partners'>
+  <div className='section2-title'>
+    <h2 style={{ fontWeight: "bold", textAlign: 'center', marginBottom: '2rem' }}>
+      More than <span style={{ color: 'rgb(109, 15, 215)', fontWeight: "bold" }}>25+</span> Hiring Partners
+    </h2>
+  </div>
+  
+  {/* Changed to an unordered list wrapper */}
+  <ul className='section2-list' style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+    <div className='logo-track'>
+      
+      {[...partnerLogos, ...partnerLogos].map((logo, index) => (
+        /* Changed to list items */
+        <li className='logo-item' key={`${logo.name}-${index}`}>
+          <Image 
+            src={logo.src} 
+            alt={`${logo.name} - Skillra Official Hiring Partner`} 
+            width={140} 
+            height={55} 
+            style={{ objectFit: 'contain' }}
+            priority={index < 4} 
+          />
+        </li>
+      ))}
+      
+    </div>
+  </ul>
+</section>
+
+
+
 
     </main>
   );
